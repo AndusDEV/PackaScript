@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackaScript - Debain-based Package Installer</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .message {
+            position: absolute;
+            background-color: #ff6961;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debian-based Package Installer</h1>
+    <h1>! DEBIAN IS NOT READY YET. You can contribute to help at: https://github.com/andusdev/packascript !</h1>
+    
+    <section>
+        <h2>Update? (apt update)</h2>
+        <label><input type="radio" name="update" value="yes" checked> Yes</label>
+        <label><input type="radio" name="update" value="no"> No</label>
+    </section>
+    
+    <section>
+        <h2>Select Apps:</h2>
+        <span id="nosrcmsg"></span>
+        <span>Flatpak (⊞) apps don't work yet!</span>
+        <div class="category">
+            <h3>Web Browsers:</h3>
+            <label><input type="checkbox" class="app" value="firefox-esr"> Firefox (ESR / in DebianStable)</label>
+            <label><input type="checkbox" class="app" value="firefox"> Firefox (in DebianUnstable)</label>
+            <label><input type="checkbox" class="app" value="chromium"> Chromium</label>
+        </div>
+        <div class="category">
+            <h3>Messaging:</h3>
+            <label class="nosrc"><input type="checkbox" class="app" value="discord"> Discord ⚠</label>
+        </div>
+        <div class="category">
+            <h3>Gaming:</h3>
+            <label><input type="checkbox" class="flatpak-app" value="net.lutris.Lutris"> Lutris ⊞</label>
+            <label><input type="checkbox" class="flatpak-app" value="com.heroicgameslauncher.hgl"> Heroic Games Launcher ⊞</label>
+            <label class="nosrc"><input type="checkbox" class="app" value="steam"> Steam ⚠</label>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Install Script:</h2>
+        <textarea id="install-script" readonly></textarea>
+    </section>
+    
+    <button onclick="generateDebianScript()">Generate Script</button>
+    
+    <p>Copy this script to an .sh file and your installer script is ready to be used.</p>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackaScript - Arch-based Package Installer</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .message {
+            position: absolute;
+            background-color: #ff6961;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Arch-based Package Installer</h1>
+    
+    <section>
+        <h2>Update? (pacman -Syu)</h2>
+        <label><input type="radio" name="update" value="yes" checked> Yes</label>
+        <label><input type="radio" name="update" value="no"> No</label>
+    </section>
+    
+    <section>
+        <h2>Select Apps:</h2>
+        <span id="nosrcmsg"></span>
+        <span>Flatpak (⊞) & AUR apps don't work yet!</span>
+        <div class="category">
+            <h3>Web Browsers:</h3>
+            <label><input type="checkbox" class="app" value="firefox"> Firefox</label>
+            <label><input type="checkbox" class="app" value="chromium"> Chromium</label>
+            <label class="nosrc"><input type="checkbox" class="aur-app" value="opera"> Opera ⚠ [AUR]</label>
+            <label><input type="checkbox" class="aur-app" value="opera"> Brave [AUR]</label>
+        </div>
+        <div class="category">
+            <h3>Messaging:</h3>
+            <label class="nosrc"><input type="checkbox" class="app" value="discord"> Discord ⚠</label>
+            <label class="nosrc"><input type="checkbox" class="aur-app" value="skypeforlinux-bin"> Skype ⚠ [AUR]</label>
+            <label class="nosrc"><input type="checkbox" class="aur-app" value="zoom"> Zoom ⚠ [AUR]</label>
+            <label class="nosrc"><input type="checkbox" class="app" value="signal-desktop"> Signal</label>
+            <label class="nosrc"><input type="checkbox" class="app" value="telegram-desktop"> Telegram</label>
+        </div>
+        <div class="category">
+            <h3>Compression:</h3>
+            <label><input type="checkbox" class="app" value="p7zip"> p7zip</label>
+        </div>
+        <div class="category">
+            <h3>Gaming:</h3>
+            <label><input type="checkbox" class="app" value="lutris"> Lutris</label>
+            <label><input type="checkbox" class="aur-app" value="heroic-games-launcher"> Heroic Games Launcher [AUR]</label>
+            <label class="nosrc"><input type="checkbox" class="app" value="steam"> Steam ⚠</label>
+        </div>
+        <div class="category">
+            <h3>Media:</h3>
+            <label><input type="checkbox" class="app" value="vlc"> VLC</label>
+            <label><input type="checkbox" class="app" value="audacity"> Audacity</label>
+            <label class="nosrc"><input type="checkbox" class="app" value="spotify-launcher"> Spotify(-launcher) ⚠</label>
+        </div>
+        <div class="category">
+            <h3>Runtimes:</h3>
+            <label><input type="checkbox" class="app" value="jre8-openjdk"> OpenJDK JRE 8</label>
+            <label><input type="checkbox" class="app" value="jre11-openjdk"> OpenJDK JRE 11</label>
+            <label><input type="checkbox" class="app" value="jre17-openjdk"> OpenJDK JRE 17</label>
+            <label><input type="checkbox" class="app" value="jre21-openjdk"> OpenJDK JRE 21</label>
+        </div>
+        <div class="category">
+            <h3>Art Tools & Apps:</h3>
+            <label><input type="checkbox" class="app" value="krita"> Krita</label>
+            <label><input type="checkbox" class="app" value="blender"> Blender</label>
+            <label><input type="checkbox" class="app" value="gimp"> GIMP</label>
+            <label><input type="checkbox" class="aur-app" value="nomacs"> nomacs [AUR]</label>
+        </div>
+        <div class="category">
+            <h3>Dev Tools:</h3>
+            <label><input type="checkbox" class="app" value="code"> Code - OSS</label>
+            <label><input type="checkbox" class="app" value="putty"> PuTTY</label>
+            <label><input type="checkbox" class="app" value="filezilla"> FileZilla</label>
+            <label><input type="checkbox" class="app" value="python"> Python</label>
+            <label><input type="checkbox" class="app" value="jdk8-openjdk"> OpenJDK 8</label>
+            <label><input type="checkbox" class="app" value="jdk11-openjdk"> OpenJDK 11</label>
+            <label><input type="checkbox" class="app" value="jdk17-openjdk"> OpenJDK 17</label>
+            <label><input type="checkbox" class="app" value="jdk21-openjdk"> OpenJDK 21</label>
+        </div>
+        <div class="category">
+            <h3>Documents:</h3>
+            <label><input type="checkbox" class="app" value="libreoffice-still"> Libreoffice-still 
+                <input type="checkbox" class="app" value="libreoffice-fresh"> Libreoffice-fresh</label>
+        </div>
+        <div class="category">
+            <h3>Cloud Storage Clients:</h3>
+            <label class="nosrc"><input type="checkbox" class="aur-app" value="dropbox"> Dropbox ⚠ [AUR]</label>
+            <label><input type="checkbox" class="app" value="nextcloud-client"> Nextcloud Client</label>
+        </div>
+        <div class="category">
+            <h3>Mods:</h3>
+            <label><input type="checkbox" class="custom-app" value=" && curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh"> Spicetify CLI</label>
+            <label><input type="checkbox" class="custom-app" value=" && curl -fsSL https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh | sh"> Spicetify Marketplace</label>
+        </div>
+        <div class="category">
+            <h3>Miscelanious:</h3>
+            <label><input type="checkbox" class="custom-app" value=" && pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si && rm yay-bin"> Yay</label>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Install Script:</h2>
+        <textarea id="install-script" readonly></textarea>
+    </section>
+    
+    <button onclick="generateArchScript()">Generate Script</button>
+    
+    <p>Copy this script to an .sh file and your installer script is ready to be used.</p>
+
+    <script src="../script.js"></script>
+</body>
+</html>
